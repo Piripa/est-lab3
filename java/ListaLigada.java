@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 import javax.sound.midi.Soundbank;
 
 public class ListaLigada implements EstruturaDeDados{
@@ -243,10 +245,12 @@ public class ListaLigada implements EstruturaDeDados{
             return sucessorDuo(inicio, chave);
             
         }
-
     }
     public int sucessorDuo(No sucess,int chave){
-        if(sucess.getProximo().getValor() == chave){
+        if(sucess.getProximo()== null){
+            return 0;
+        }
+        else if(sucess.getValor() == chave){
             return  sucess.getProximo().getValor();
         }
         return sucessorDuo(sucess.getProximo(), chave);
@@ -254,20 +258,23 @@ public class ListaLigada implements EstruturaDeDados{
 
     @Override
     public int prodessor(int chave) {
-        if(inicio.getValor() == chave){
+        if(inicio == null){
             return -1;
         }
-        else if(inicio.getProximo().getValor()==chave){
+        else if(inicio.getValor()==chave){
             return -1;
         }
         else{
-            return prodessorDuo(inicio.getProximo(), chave);
+            return prodessorDuo(inicio, chave);
         }
     }
     public int prodessorDuo(No prod, int chave){
-        int save = prod.getValor();
+        if(prod.getProximo()==null){
+
+            return 0;
+        }
         if(prod.getProximo().getValor()==chave){
-            return save;
+            return prod.getValor();
         }
         else{
             return prodessorDuo(prod.getProximo(), chave);
@@ -284,7 +291,7 @@ public class ListaLigada implements EstruturaDeDados{
         System.out.println(lista.maximum()); 
         System.out.println(lista.minimum());   
         System.out.println(lista.sucessor(10));
-        System.out.println(lista.prodessor(12));
+        System.out.println(lista.prodessor(10));
         lista.insert(5);
         System.out.println(lista.minimum());
         
